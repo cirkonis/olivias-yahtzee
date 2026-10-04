@@ -162,17 +162,6 @@ export function parIndex(card: Card) {
   }, 0)
 }
 
-/**
- * For an open upper box: how many of that face bring the index back to par,
- * given where it stands now. 0 means you can scratch it and still be on par;
- * more than 5 means this box can't make up the gap on its own.
- */
-export function upperNeed(card: Card, category: UpperCategory) {
-  const face = CATEGORY_INFO[category].face!
-  const target = upperPar(category) - parIndex(card)
-  return Math.max(0, Math.ceil(target / face))
-}
-
 export type BonusState = 'secured' | 'lost' | 'chasing'
 
 /** Has the 35 already been banked, become impossible, or is it still in play? */

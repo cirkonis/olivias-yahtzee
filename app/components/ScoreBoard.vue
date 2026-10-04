@@ -98,12 +98,6 @@ function toggleHelp(c: Category) {
   else next.add(c)
   helpOpen.value = next
 }
-
-function hint(c: Category) {
-  const info = CATEGORY_INFO[c]
-  if (info.kind === 'fixed') return String(info.fixed)
-  return ''
-}
 </script>
 
 <template>
@@ -202,7 +196,6 @@ function hint(c: Category) {
               <span v-if="card.scores[c] !== null" class="text-2xl font-bold tabular-nums" :class="card.scores[c] === 0 ? 'text-muted-foreground' : ''">
                 {{ card.scores[c] }}
               </span>
-              <span v-else class="text-muted-foreground text-sm">{{ hint(c) }}</span>
             </button>
           </div>
           <p v-if="helpOpen.has(c)" class="bg-secondary text-muted-foreground border-b px-4 py-2 text-sm">
@@ -236,7 +229,6 @@ function hint(c: Category) {
                 class="text-2xl font-bold tabular-nums"
                 :class="card.scores[c] === 0 ? 'text-muted-foreground' : c === 'yahtzee' ? 'bg-highlight text-highlight-foreground rounded px-1.5' : ''"
               >{{ card.scores[c] }}</span>
-              <span v-else class="text-muted-foreground/60 text-sm">{{ hint(c) }}</span>
             </button>
           </div>
           <p v-if="helpOpen.has(c)" class="bg-secondary text-muted-foreground border-b px-4 py-2 text-sm">

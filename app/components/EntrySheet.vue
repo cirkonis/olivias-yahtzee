@@ -7,11 +7,8 @@ import {
   YAHTZEE_BONUS_HELP,
   canEarnYahtzeeBonus,
   isValidScore,
-  upperNeed,
-  upperPar,
   type Card,
   type Category,
-  type UpperCategory,
 } from '~~/shared/yahtzee'
 
 const open = defineModel<boolean>({ required: true })
@@ -48,14 +45,7 @@ const offerBonus = computed(
 const upperOptions = computed(() => {
   if (info.value?.kind !== 'upper') return []
   const face = info.value.face!
-  const cat = props.category as UpperCategory
-  const need = upperNeed(props.card, cat)
-  return [0, 1, 2, 3, 4, 5].map((count) => ({
-    count,
-    value: count * face,
-    isPar: count * face === upperPar(cat),
-    isNeed: count === need,
-  }))
+  return [0, 1, 2, 3, 4, 5].map((count) => ({ count, value: count * face }))
 })
 
 const typedValue = computed(() => (typed.value === '' ? null : Number(typed.value)))
@@ -87,16 +77,11 @@ function save(value: number) {
           v-for="opt in upperOptions"
           :key="opt.count"
           type="button"
-          class="relative flex h-20 flex-col items-center justify-center rounded-xl border-2 transition-colors active:scale-[0.97]"
-          :class="opt.isNeed ? 'border-primary bg-accent' : 'bg-card'"
+          class="bg-card flex h-20 flex-col items-center justify-center rounded-xl border-2 transition-colors active:scale-[0.97]"
           @click="save(opt.value)"
         >
           <span class="text-2xl font-bold tabular-nums">{{ opt.value }}</span>
           <span class="text-muted-foreground text-xs">{{ opt.count }}× {{ info.face }}</span>
-          <span
-            v-if="opt.isPar"
-            class="bg-highlight text-highlight-foreground absolute top-1 right-1 rounded px-1 text-[10px] font-bold"
-          >PAR</span>
         </button>
       </div>
 
