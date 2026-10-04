@@ -59,8 +59,8 @@ filled boxes are:
 - then 20 in Fives (par 15) → **+1**
 - so Aces only needs **2** to stay on course.
 
-Each open upper box shows what it needs ("need 2×"); "par 3×" means that box alone
-can't close the gap. The chip turns into **✓ 35** once the bonus is banked, and
+The board keeps it to that one number. When you tap an upper box, the entry sheet
+outlines the count that gets you back to par. The chip turns into **✓ 35** once the bonus is banked, and
 strikes through once it's out of reach.
 
 ## Data model

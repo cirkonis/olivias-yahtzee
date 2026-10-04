@@ -6,15 +6,12 @@ import {
   UPPER,
   UPPER_BONUS_THRESHOLD,
   applyEntry,
-  bonusState,
   grandTotal,
   isGameComplete,
   undo,
-  upperNeed,
   upperSubtotal,
   yahtzeeBonusTotal,
   type Category,
-  type UpperCategory,
 } from '~~/shared/yahtzee'
 import type { GameState } from '~~/shared/yahtzee'
 
@@ -104,13 +101,6 @@ function toggleHelp(c: Category) {
 
 function hint(c: Category) {
   const info = CATEGORY_INFO[c]
-  if (info.kind === 'upper') {
-    if (bonusState(card.value) !== 'chasing') return ''
-    const need = upperNeed(card.value, c as UpperCategory)
-    if (need === 0) return 'any'
-    // Too far behind for this box alone — fall back to plain par.
-    return need > 5 ? 'par 3×' : `need ${need}×`
-  }
   if (info.kind === 'fixed') return String(info.fixed)
   return ''
 }
